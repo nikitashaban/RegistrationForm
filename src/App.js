@@ -1,14 +1,18 @@
 import React from "react";
-import styles from "./App.module.scss";
-import { useSelector } from "react-redux";
 
-import Form from "./components/Form";
+import { Route, Switch } from "react-router-dom";
+import Form from "./components/Form/Form";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Articles from "./components/Articles/Articles";
 
 const App = () => {
   return (
-    <div className={styles.Wrapper}>
-      <Form />
-    </div>
+    <React.Fragment>
+      <Switch>
+        <Route path="/" exact render={props => <Form {...props} />} />
+        <Route path="/articles" render={props => <Articles {...props} />} />
+      </Switch>
+    </React.Fragment>
   );
 };
 

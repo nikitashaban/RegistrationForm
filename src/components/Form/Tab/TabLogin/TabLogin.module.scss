@@ -1,0 +1,20 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+
+    p {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            outline: none;
+            width: 100%;
+            padding-left: 10px;
+        }
+    }
+
+    span {
+        color: red;
+        margin-bottom: 5px;
+    }
+}
