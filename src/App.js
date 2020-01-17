@@ -1,10 +1,15 @@
 import React from "react";
-import "./App.css";
+import styles from "./App.module.scss";
 import { useSelector } from "react-redux";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+import Form from "./components/Form";
 
 const App = () => {
-  return <div></div>;
+  return (
+    <div className={styles.Wrapper}>
+      <Form />
+    </div>
+  );
 };
 
 export default App;
