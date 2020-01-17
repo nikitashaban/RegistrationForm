@@ -7,18 +7,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Form = props => {
   const [isSubmiting, setIsSubmiting] = useState(false);
+  const [tabs, setTabs] = useState("first");
   const onSubmit = values => {
     setIsSubmiting(true);
     const updUsers = JSON.parse(localStorage.getItem("users")) || [];
     delay(500)
       .then(() => updUsers.push(values))
       .then(() => localStorage.setItem("users", JSON.stringify(updUsers)))
-      .then(() => setIsSubmiting(false));
+      .then(() => setIsSubmiting(false))
+      .then(() => setTabs("second"));
   };
 
   const { register, handleSubmit, errors, watch } = useForm();
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container id="left-tabs-example" activeKey={tabs}>
       <Row
         style={{
           width: "100%",
@@ -29,10 +31,14 @@ const Form = props => {
         <Col sm={3}>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              <Nav.Link eventKey="first">Registration</Nav.Link>
+              <Nav.Link onClick={() => setTabs("first")} eventKey="first">
+                Registration
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second">Login</Nav.Link>
+              <Nav.Link onClick={() => setTabs("second")} eventKey="second">
+                Login
+              </Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
