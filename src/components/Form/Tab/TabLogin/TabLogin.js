@@ -4,17 +4,20 @@ import { Tab, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import { delay } from "../../../../helpers/delay";
 import styles from "./TabLogin.module.scss";
-import { isUserAuth } from "../../../../ducks/auth";
+import { isUserAuth } from "../../../../ducks/main";
 import { useDispatch } from "react-redux";
 
 const TabLogin = props => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, setError, formState } = useForm();
   const [isSubmiting, setIsSubmiting] = useState(false);
 
   const submitLogin = ({ enterLogin, enterPassword }) => {
     const users = JSON.parse(localStorage.getItem("users"));
-    const user = users.find(u => u.login === enterLogin && u.password === enterPassword);
+
+    const user = users
+      ? users.find(u => u.login === enterLogin && u.password === enterPassword)
+      : null;
     setIsSubmiting(true);
     delay(500).then(() => {
       setIsSubmiting(false);
@@ -23,7 +26,7 @@ const TabLogin = props => {
         console.log("success");
         props.history.push("/articles");
       } else {
-        console.log("fail");
+        setError("global", "incorrect", "Your password or login is incorrect");
       }
     });
   };
@@ -44,7 +47,8 @@ const TabLogin = props => {
         {errors.enterPassword && errors.enterPassword.type === "required" && (
           <span>This field is required</span>
         )}
-
+        {errors.global && <span>{errors.global.message}</span>}
+        {/* {error && <span>"Your password or login is incorrect"</span>} */}
         <Button
           type="submit"
           onSubmit={handleSubmit(submitLogin)}

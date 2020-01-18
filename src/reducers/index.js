@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 
-import auth from "../ducks/auth";
+import main from "../ducks/main";
 
-export default combineReducers({ auth });
+export default combineReducers({ main });

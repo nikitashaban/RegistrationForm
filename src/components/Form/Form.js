@@ -4,7 +4,7 @@ import TabRegistration from "./Tab/TabRegistration./TabRegistration";
 import TabLogin from "./Tab/TabLogin/TabLogin";
 
 const Form = props => {
-  const [activeTab, setActiveTab] = useState("first");
+  const [activeTab, setActiveTab] = useState("register");
 
   return (
     <Tab.Container id="left-tabs-example" activeKey={activeTab}>

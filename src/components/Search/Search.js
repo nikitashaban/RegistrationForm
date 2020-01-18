@@ -1,22 +1,24 @@
 import React from "react";
 import { Navbar, Form, FormControl, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { articleSearchData } from "../../ducks/auth";
+import { articleSearchData, isUserAuth } from "../../ducks/main";
 
 const Search = props => {
-  const data = useSelector(state => state.auth.results);
+  const data = useSelector(state => state.main.searchedArticles);
   const dispatch = useDispatch();
   console.log(data);
   return (
     <Navbar bg="light" expand="lg">
       <Form inline>
         <FormControl
-          onChange={event => dispatch(articleSearchData(event.target.value, data))}
+          onChange={event => dispatch(articleSearchData(event.target.value))}
           type="text"
           placeholder="Search"
           className="mr-sm-2"
         />
-        <Button variant="outline-success">Logout</Button>
+        <Button onClick={() => dispatch(isUserAuth(false))} variant="outline-success">
+          Logout
+        </Button>
       </Form>
     </Navbar>
   );

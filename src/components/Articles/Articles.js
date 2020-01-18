@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Search from "../Search/Search";
 import Pagination from "../../helpers/Pagination";
-import { articleFetchData } from "../../ducks/auth";
+import { articleFetchData } from "../../ducks/main";
 import { useDispatch, useSelector } from "react-redux";
 import Article from "../Articles/Article/Article";
 
 const Articles = props => {
-  const data = useSelector(state => state.auth.results);
+  const data = useSelector(({ main }) => main.searchedArticles || main.articles);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,8 +14,8 @@ const Articles = props => {
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(5);
-  //Get current posts
+
+  const postPerPage = 5;
   const indexOfLastPost = currentPage * postPerPage;
   const indeOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = data.slice(indeOfFirstPost, indexOfLastPost);

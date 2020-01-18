@@ -6,7 +6,8 @@ const SEARCH_ARTICLES = "SEARCH_ARTICLES";
 
 const initialState = {
   isAuth: false,
-  results: []
+  articles: [],
+  searchedArticles: null
 };
 
 //reducer
@@ -21,13 +22,13 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_ARTICLES_SUCCESS: {
       return {
         ...state,
-        results: payload
+        articles: payload
       };
     }
     case SEARCH_ARTICLES: {
       return {
         ...state,
-        results: [...payload]
+        searchedArticles: payload
       };
     }
     default: {
@@ -51,9 +52,16 @@ export const articleFetchData = () => {
   };
 };
 
-export const articleSearchData = (input, results) => {
-  return dispatch => {
-    const searchedArray = results.filter(el => el.id == input);
-    dispatch(searchArticles(searchedArray));
+export const articleSearchData = input => {
+  return (dispatch, getState) => {
+    if (!input) {
+      dispatch(searchArticles(null));
+    } else {
+      const articles = getState().main.articles;
+      const searchedArray = articles.filter(
+        el => el.title.includes(input) || el.text.includes(input)
+      );
+      dispatch(searchArticles(searchedArray));
+    }
   };
 };

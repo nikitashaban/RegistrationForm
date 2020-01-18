@@ -4,13 +4,15 @@ import { Route, Switch } from "react-router-dom";
 import Form from "./components/Form/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Articles from "./components/Articles/Articles";
-
+import GuardRoute from "./components/GuardRoute/GuardRoute";
 const App = () => {
   return (
     <React.Fragment>
       <Switch>
-        <Route path="/" exact render={props => <Form {...props} />} />
-        <Route path="/articles" render={props => <Articles {...props} />} />
+        <Route path="/" exact component={Form} />
+        <GuardRoute>
+          <Route path="/articles" component={Articles} />
+        </GuardRoute>
       </Switch>
     </React.Fragment>
   );
