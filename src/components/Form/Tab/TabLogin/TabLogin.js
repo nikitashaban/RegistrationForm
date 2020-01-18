@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 
 const TabLogin = props => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors, setError, formState } = useForm();
+  const { register, handleSubmit, errors, setError } = useForm();
   const [isSubmiting, setIsSubmiting] = useState(false);
 
   const submitLogin = ({ enterLogin, enterPassword }) => {
@@ -22,6 +22,7 @@ const TabLogin = props => {
     delay(500).then(() => {
       setIsSubmiting(false);
       if (user) {
+        localStorage.setItem("isAuth", JSON.stringify(true));
         dispatch(isUserAuth(true));
         console.log("success");
         props.history.push("/articles");
@@ -32,17 +33,17 @@ const TabLogin = props => {
   };
   return (
     <Tab.Pane eventKey="login">
-      <form className={styles.Form} onSubmit={handleSubmit(submitLogin)}>
+      <form className={styles.Form} onSubmit={handleSubmit(submitLogin)} novalidate>
         <p>
           Login
-          <input name="enterLogin" ref={register({ required: true })} type="text" />
+          <input name="enterLogin" ref={register({ required: true })} type="text" required />
         </p>
         {errors.enterLogin && errors.enterLogin.type === "required" && (
           <span>This field is required</span>
         )}
         <p>
           Password
-          <input name="enterPassword" ref={register({ required: true })} type="password" />
+          <input name="enterPassword" ref={register({ required: true })} type="password" required />
         </p>
         {errors.enterPassword && errors.enterPassword.type === "required" && (
           <span>This field is required</span>

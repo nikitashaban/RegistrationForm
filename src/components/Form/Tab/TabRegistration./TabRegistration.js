@@ -18,15 +18,15 @@ const TabRegistration = props => {
   };
   return (
     <Tab.Pane eventKey="register">
-      <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.Form} onSubmit={handleSubmit(onSubmit)} novalidate>
         <p>
           Login
-          <input name="login" ref={register({ required: true })} type="text" />
+          <input name="login" ref={register({ required: true })} type="text" required />
         </p>
         {errors.login && errors.login.type === "required" && <span>This field is required</span>}
         <p>
           Email
-          <input name="email" ref={register({ required: true })} type="email" />
+          <input name="email" ref={register({ required: true })} type="email" required />
         </p>
         {errors.email && errors.email.type === "required" && <span>This field is required</span>}
         <p>
@@ -35,6 +35,7 @@ const TabRegistration = props => {
             name="password"
             ref={register({ required: true, minLength: 6, maxLength: 12 })}
             type="password"
+            required
           />
         </p>
         {errors.password && errors.password.type === "minLength" && (
@@ -54,6 +55,7 @@ const TabRegistration = props => {
               }
             })}
             type="password"
+            required
           />
         </p>
         {errors.secondPas && <span>The password is not the same</span>}

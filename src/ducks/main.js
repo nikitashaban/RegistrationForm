@@ -5,7 +5,7 @@ const SEARCH_ARTICLES = "SEARCH_ARTICLES";
 //initial state
 
 const initialState = {
-  isAuth: false,
+  isAuth: localStorage.getItem("isAuth"),
   articles: [],
   searchedArticles: null
 };
@@ -52,6 +52,13 @@ export const articleFetchData = () => {
   };
 };
 
+export const clearAuth = payload => {
+  return dispatch => {
+    localStorage.removeItem("isAuth");
+    dispatch(isUserAuth(payload));
+  };
+};
+
 export const articleSearchData = input => {
   return (dispatch, getState) => {
     if (!input) {
@@ -59,7 +66,7 @@ export const articleSearchData = input => {
     } else {
       const articles = getState().main.articles;
       const searchedArray = articles.filter(
-        el => el.title.includes(input) || el.text.includes(input)
+        el => el.title.toLowerCase().includes(input) || el.text.toLowerCase().includes(input)
       );
       dispatch(searchArticles(searchedArray));
     }

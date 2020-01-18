@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Form, FormControl, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { articleSearchData, isUserAuth } from "../../ducks/main";
+import { articleSearchData, clearAuth } from "../../ducks/main";
 
 const Search = props => {
   const data = useSelector(state => state.main.searchedArticles);
@@ -16,7 +16,7 @@ const Search = props => {
           placeholder="Search"
           className="mr-sm-2"
         />
-        <Button onClick={() => dispatch(isUserAuth(false))} variant="outline-success">
+        <Button onClick={() => dispatch(clearAuth(false))} variant="outline-success">
           Logout
         </Button>
       </Form>
