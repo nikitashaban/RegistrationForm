@@ -1,6 +1,7 @@
 // const
 const USER_IS_AUTH = "USER_IS_AUTH";
 const FETCH_ARTICLES_SUCCESS = "FETCH_ARTICLES_SUCCESS";
+const SEARCH_ARTICLES = "SEARCH_ARTICLES";
 //initial state
 
 const initialState = {
@@ -23,6 +24,12 @@ export default (state = initialState, { type, payload }) => {
         results: payload
       };
     }
+    case SEARCH_ARTICLES: {
+      return {
+        ...state,
+        results: [...payload]
+      };
+    }
     default: {
       return state;
     }
@@ -32,6 +39,7 @@ export default (state = initialState, { type, payload }) => {
 //actions
 export const isUserAuth = payload => ({ type: USER_IS_AUTH, payload });
 export const fetchArticlesSuccess = payload => ({ type: FETCH_ARTICLES_SUCCESS, payload });
+export const searchArticles = payload => ({ type: SEARCH_ARTICLES, payload });
 //action creators
 
 export const articleFetchData = () => {
@@ -40,5 +48,12 @@ export const articleFetchData = () => {
       .then(response => response.json())
       .then(list => dispatch(fetchArticlesSuccess(list.data)))
       .catch(error => console.log(error.message));
+  };
+};
+
+export const articleSearchData = (input, results) => {
+  return dispatch => {
+    const searchedArray = results.filter(el => el.id == input);
+    dispatch(searchArticles(searchedArray));
   };
 };

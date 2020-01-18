@@ -5,7 +5,7 @@ const Article = ({ posts }) => {
   return (
     <div>
       {posts.map(info => (
-        <Card className="container">
+        <Card key={info.id} className="container">
           <h3 className="text-primary">{info.title}</h3>
           <p>Id: {info.id}</p>
           <Card.Body>{info.text}</Card.Body>
