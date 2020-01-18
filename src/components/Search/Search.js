@@ -1,12 +1,10 @@
 import React from "react";
 import { Navbar, Form, FormControl, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { articleSearchData, clearAuth } from "../../ducks/main";
 
 const Search = props => {
-  const data = useSelector(state => state.main.searchedArticles);
   const dispatch = useDispatch();
-  console.log(data);
   return (
     <Navbar bg="light" expand="lg">
       <Form inline>

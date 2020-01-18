@@ -24,7 +24,6 @@ const TabLogin = props => {
       if (user) {
         localStorage.setItem("isAuth", JSON.stringify(true));
         dispatch(isUserAuth(true));
-        console.log("success");
         props.history.push("/articles");
       } else {
         setError("global", "incorrect", "Your password or login is incorrect");
@@ -33,7 +32,7 @@ const TabLogin = props => {
   };
   return (
     <Tab.Pane eventKey="login">
-      <form className={styles.Form} onSubmit={handleSubmit(submitLogin)} novalidate>
+      <form className={styles.Form} onSubmit={handleSubmit(submitLogin)} noValidate>
         <p>
           Login
           <input name="enterLogin" ref={register({ required: true })} type="text" required />
