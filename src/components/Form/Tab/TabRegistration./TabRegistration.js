@@ -26,7 +26,7 @@ const TabRegistration = props => {
         {errors.login && errors.login.type === "required" && <span>This field is required</span>}
         <p>
           Email
-          <input name="email" ref={register({ required: true })} type="email" required />
+          <input name="email" ref={register({ required: true })} type="email" />
         </p>
         {errors.email && errors.email.type === "required" && <span>This field is required</span>}
         <p>
