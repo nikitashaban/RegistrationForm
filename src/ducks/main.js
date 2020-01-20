@@ -45,7 +45,7 @@ export const searchArticles = payload => ({ type: SEARCH_ARTICLES, payload });
 
 export const articleFetchData = () => {
   return dispatch => {
-    fetch("http://www.mocky.io/v2/5d9dc38e3200004e00329939")
+    fetch("https://www.mocky.io/v2/5d9dc38e3200004e00329939")
       .then(response => response.json())
       .then(list => dispatch(fetchArticlesSuccess(list.data)))
       .catch(error => console.log(error.message));
