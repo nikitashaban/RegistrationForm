@@ -4,7 +4,7 @@ import TabRegistration from "./Tab/TabRegistration./TabRegistration";
 import TabLogin from "./Tab/TabLogin/TabLogin";
 
 const Form = props => {
-  const [activeTab, setActiveTab] = useState("register");
+  const [activeTab, setActiveTab] = useState("login");
 
   return (
     <Tab.Container id="left-tabs-example" activeKey={activeTab}>
@@ -16,24 +16,24 @@ const Form = props => {
           alignItems: "center"
         }}
       >
-        <Col sm={3}>
+        <Col md={3}>
           <Nav variant="pills" className="flex-column">
-            <Nav.Item>
-              <Nav.Link onClick={() => setActiveTab("register")} eventKey="register">
-                Registration
-              </Nav.Link>
-            </Nav.Item>
             <Nav.Item>
               <Nav.Link onClick={() => setActiveTab("login")} eventKey="login">
                 Login
               </Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link onClick={() => setActiveTab("register")} eventKey="register">
+                Registration
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </Col>
-        <Col sm={4}>
+        <Col md={4}>
           <Tab.Content>
-            {activeTab === "register" && <TabRegistration setTabs={setActiveTab} />}
             {activeTab === "login" && <TabLogin />}
+            {activeTab === "register" && <TabRegistration setTabs={setActiveTab} />}
           </Tab.Content>
         </Col>
       </Row>
