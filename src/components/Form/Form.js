@@ -16,7 +16,7 @@ const Form = props => {
           alignItems: "center"
         }}
       >
-        <Col md={3}>
+        <Col md={3} xs="auto">
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
               <Nav.Link onClick={() => setActiveTab("login")} eventKey="login">
@@ -30,7 +30,7 @@ const Form = props => {
             </Nav.Item>
           </Nav>
         </Col>
-        <Col md={4}>
+        <Col md={4} xs="auto">
           <Tab.Content>
             {activeTab === "login" && <TabLogin />}
             {activeTab === "register" && <TabRegistration setTabs={setActiveTab} />}
