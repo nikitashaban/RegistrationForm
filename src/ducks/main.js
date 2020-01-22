@@ -66,7 +66,11 @@ export const articleSearchData = input => {
     } else {
       const articles = getState().main.articles;
       const searchedArray = articles.filter(
-        el => el.title.toLowerCase().includes(input) || el.text.toLowerCase().includes(input)
+        el =>
+          el.title.toLowerCase().includes(input) ||
+          el.text.toLowerCase().includes(input) ||
+          el.title.toUpperCase().includes(input) ||
+          el.text.toUpperCase().includes(input)
       );
       dispatch(searchArticles(searchedArray));
     }
